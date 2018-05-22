@@ -1,12 +1,12 @@
-services:
-  - docker
-script:
-  - docker build -t ndamiens/nginx-php .
-deploy:
-  provider: script
-  script: bash docker_push
-  on:
-    branch: master
+sudo: true
+dist: trusty
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - docker build -t $DOCKER_USERNAME/nginx-php .
+      - docker push $DOCKER_USERNAME/nginx-php
 env:
   global:
   - secure: mc+TdfdV2Quuhg35T7DphRUjN60S1t3mmHbMD0YRX3poNpl/3l4J3TRY7cXclxuOissgmghO7X8O9BLQFDr8NIfMOjlJjzcr3DIuWnHoRCFBEG1YyMA40yrbxjilN2xkrUQCNfyxEb+8CwGe1OrJhVLf+f5/q7+fm2HKYGxJa5oERWPU42mlyColuH7Hl9Q1SddGTYgeOpO7L5pS2Av2xwVF0RTgUnCXZAej1+ToQZ9q/Pa722YShQ2/+K8DrnIpoa6pyhLKFBv67rWeV2Uci5K+8Ix/m9wPDf73xZm13hnp8mNkpEL345Am45pcxmdF/bg6HLmEzZwm2EfjPXhPUls3T6Z+RwMwbsVHYj12b/iQ8U0m6H83FLVMWJTdVp55UyIlmSnMZmDeyrtrxfnydV4d7euDrMiz4FsDGXMTXpmx6DcuvHb+FGxlpwuoVY9Fn6hMG6kjXCaKMiLd2CAuQvKRoAfEMVsLXPWWhXTG9NF4LoRFiC3iLiVWmYGCmMTdEVZ4PCwO503f/Gu1Was0GPE7DdtxvWd1tJxIg8L4LAeeSlzf79cJmLcbVj4C2X+yAgFpCkYbCtQ8IC9yeKs5ztkS0JgVVDh12Of1qzcvhAIhl7EGrp4Ou05a2mCpCZNMcKpNi9ITcPacjqdt96WsKXlbB4jiflEa5f0grSnNxdA=
