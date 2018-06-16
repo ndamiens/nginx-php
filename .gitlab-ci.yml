@@ -13,6 +13,6 @@ push:
      - master
   stage: push
   script:
-     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_LOGIN" --password-stdin
      - docker push $DOCKER_USERNAME/nginx-php
 
