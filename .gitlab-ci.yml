@@ -1,0 +1,7 @@
+build:
+  image: docker
+  stage: build
+  script:
+     - docker build --pull -t ndamiens/nginx-php:latest .
+
+
