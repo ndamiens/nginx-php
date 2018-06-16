@@ -1,7 +1,18 @@
+stages:
+  - build
+  - push
 build:
   image: docker
   stage: build
   script:
      - docker build --pull -t ndamiens/nginx-php:latest .
 
+push:
+  image: docker
+  only:
+     - master
+  stage: push
+  script:
+     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+     - docker push $DOCKER_USERNAME/nginx-php
 
