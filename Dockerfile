@@ -15,8 +15,9 @@ RUN mkdir -p /opt/app/www;
 
 WORKDIR /opt/app
 #ADD boot.sh /usr/local/bin/boot
-ADD supervisord.conf /etc/supervisord.conf
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf", "-n"]
+ADD supervisor_nginx.conf /etc/supervisor/nginx.conf
+ADD supervisor_fpm.conf /etc/supervisor/fpm.conf
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf", "-n"]
 RUN mkdir /run/php; chmod 755 /run/php; chown www-data /run/php
 ADD nginx.conf /etc/nginx/sites-enabled/default
 
