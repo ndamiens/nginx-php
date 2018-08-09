@@ -1,11 +1,15 @@
 stages:
   - build
   - push
+
 build:
   image: docker
   stage: build
   script:
-     - docker build --no-cache --pull -t ndamiens/nginx-php:latest .
+     - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+     - docker build --pull --no-cache -t "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}" .
+     - docker tag "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}" ndamiens/nginx-php:latest
+     - docker push "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}"
 
 push:
   image: docker

@@ -14,8 +14,9 @@ RUN dpkg-reconfigure tzdata
 RUN mkdir -p /opt/app/www;
 
 WORKDIR /opt/app
-ADD boot.sh /usr/local/bin/boot
-CMD /usr/local/bin/boot
+#ADD boot.sh /usr/local/bin/boot
+ADD supervisord.conf /etc/supervisord.conf
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf", "-n"]
 RUN mkdir /run/php; chmod 755 /run/php; chown www-data /run/php
 ADD nginx.conf /etc/nginx/sites-enabled/default
 
