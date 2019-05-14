@@ -8,10 +8,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
 	nginx php-fpm iputils-ping ssh xz-utils libxrender1 libxext6 php-mysql unzip postgresql-client \
 	fonts-dejavu fonts-roboto tzdata supervisor ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
-RUN rm /etc/localtime && cp /usr/share/zoneinfo/$TZ /etc/localtime
-RUN echo $TZ > /etc/timezone
-RUN dpkg-reconfigure tzdata
-RUN mkdir -p /opt/app/www;
+RUN rm /etc/localtime && cp /usr/share/zoneinfo/$TZ /etc/localtime && \
+	echo $TZ > /etc/timezone && \
+	dpkg-reconfigure tzdata && \
+	mkdir -p /opt/app/www
 WORKDIR /root
 ADD getcomposer.sh ./
 RUN bash getcomposer.sh && mv -v composer.phar /usr/local/bin/composer && rm getcomposer.sh
