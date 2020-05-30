@@ -17,6 +17,7 @@ push:
      - master
   stage: push
   script:
+     - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
      - docker pull "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}"
      - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_LOGIN" --password-stdin
      - docker tag "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}" ndamiens/nginx-php:latest
