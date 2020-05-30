@@ -12,7 +12,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
 	&& echo $TZ > /etc/timezone \
 	&& dpkg-reconfigure tzdata \
 	&& mkdir -p /opt/app/www \
-	&& mkdir /run/php; chmod 755 /run/php; chown www-data /run/php
+	&& mkdir /run/php; chmod 755 /run/php; chown www-data /run/php \
+	&& useradd app -s /bin/bash
 WORKDIR /root
 ADD getcomposer.sh ./
 RUN bash getcomposer.sh && mv -v composer.phar /usr/local/bin/composer && rm getcomposer.sh
