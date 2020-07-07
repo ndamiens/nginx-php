@@ -6,7 +6,7 @@ ENV TZ=Europe/Paris
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends git tree wget less vim \
 	php-json php-cli php-zip php-curl php-pgsql php-xml php-mbstring php-bcmath php-gd php-mongodb \
 	nginx php-fpm iputils-ping ssh xz-utils libxrender1 libxext6 php-mysql unzip postgresql-client \
-	fonts-dejavu fonts-roboto tzdata supervisor ca-certificates s4cmd \
+	fonts-dejavu fonts-roboto tzdata supervisor ca-certificates s4cmd zip \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm /etc/localtime && cp /usr/share/zoneinfo/$TZ /etc/localtime \
 	&& echo $TZ > /etc/timezone \
