@@ -1,6 +1,8 @@
 name: ci
 
 on:
+  schedule:
+    - cron: '0 9 * * *'
   push:
     branches: buster
 
